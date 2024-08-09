@@ -13,13 +13,20 @@
         <div class="col-md-6">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <h1 class="card-title text-center">Hi! This site can provide you with a weather forecast for the next 3 days</h1>
+                    <h1 class="card-title text-center">Hi! This site can provide you with a weather forecast for the
+                        next 3 days</h1>
                     <form method="POST" class="mt-4">
                         <div class="form-group">
                             <input type="text" class="form-control" name="city" placeholder="Enter City Name" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Get weather</button>
                     </form>
+
+                    {% if invalid_city_message %}
+                        <div class="alert alert-danger mt-3" role="alert">
+                            {{ invalid_city_message }}
+                        </div>
+                    {% endif %}
 
                     {% if weather %}
                     <div class="mt-5">
@@ -53,7 +60,7 @@
 
 <!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.11/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

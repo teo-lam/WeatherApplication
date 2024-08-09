@@ -25,6 +25,7 @@ class Weather(db.Model):
 @app.route('/', methods=['GET', 'POST'])
 def index():
     weather_data = None
+    invalid_city_message = ''
     if request.method == 'POST':
         # select city from template
         city = request.form['city']
@@ -73,9 +74,10 @@ def index():
 
                 db.session.commit()
         else:
+            invalid_city_message =  response.json()['error']['message'];
             weather_data = None
 
-    return render_template('index.html', weather=weather_data)
+    return render_template('index.html', weather=weather_data, invalid_city_message=invalid_city_message)
 
 @app.errorhandler(404)
 def page_not_found(e):
