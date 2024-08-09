@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="card-title text-center">Hi! This site can provide you with a weather forecast for the next 3 days</h1>
+                    <form method="POST" class="mt-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="city" placeholder="Enter City Name" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Get weather</button>
+                    </form>
+
+                    {% if weather %}
+                    <div class="mt-5">
+                        <h2 class="text-center">Weather Forecast for {{ weather['location'] ['name'] }}</h2>
+                        <div class="row">
+                            {% for day in weather['forecast']['forecastday'] %}
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ day['date'] }}</h5>
+                                        <p class="card-text">
+                                            <strong>Condition:</strong> {{ day['day']['condition']['text'] }}<br>
+                                            <strong>Max Temp:</strong> {{ day['day']['maxtemp_c'] }} °C<br>
+                                            <strong>Min Temp:</strong> {{ day['day']['mintemp_c'] }} °C<br>
+                                            <strong>Precipitation:</strong> {{ day['day']['totalprecip_mm'] }} mm<br>
+                                            <strong>Sunrise:</strong> {{ day['astro']['sunrise'] }}<br>
+                                            <strong>Sunset/Sumset:</strong> {{ day['astro']['sunset'] }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.11/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
